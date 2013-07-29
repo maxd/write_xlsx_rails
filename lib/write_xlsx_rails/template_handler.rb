@@ -12,11 +12,13 @@ module WriteXlsxRails
       require 'stringio'
 
       __io = StringIO.new
-      workbook = WriteXLSX.new(__io)
+
+      __workbook_defined = defined? workbook
+      workbook = WriteXLSX.new(__io) unless __workbook_defined
 
       #{template.source}
 
-      workbook.close
+      workbook.close unless __workbook_defined
 
       __io.flush
       __io.string

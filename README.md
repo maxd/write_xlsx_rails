@@ -90,8 +90,10 @@ User.to_xlsx package: xlsx_package, (other options)
 Partials work as expected:
 
 ```ruby
-render partial: 'header', locals: { worksheet: worksheet }
+render partial: 'header', locals: { workbook: workbook }
 ```
+
+> NOTE: Every partial instantiate own _workbook_ variable. So, it can cause problems. To prevent this just pass workbook as local variable to the partial.
 
 ##Dependencies
 
