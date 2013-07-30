@@ -8,7 +8,7 @@ module WriteXlsxRails
     end
 
     def self.call(template)
-      <<-TEMPLATE
+      <<-TEMPLATE.gsub(/\n/, ';').gsub('{{source}}', template.source)
       require 'stringio'
 
       __io = StringIO.new
@@ -16,7 +16,7 @@ module WriteXlsxRails
       __workbook_defined = defined? workbook
       workbook = WriteXLSX.new(__io) unless __workbook_defined
 
-      #{template.source}
+      {{source}}
 
       workbook.close unless __workbook_defined
 
