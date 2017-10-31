@@ -1,6 +1,6 @@
 require 'action_controller'
 
-unless defined? Mime::XLSX
+unless defined? Mime[:xlsx]
   Mime::Type.register "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", :xlsx
 end
 
@@ -19,7 +19,7 @@ ActionController::Renderers.add :xlsx do |filename, options|
   download_name = options.delete(:filename) || filename
   download_name += ".xlsx" unless download_name =~ /\.xlsx$/
 
-  send_data render_to_string(options), filename: download_name, type: Mime::XLSX, disposition: disposition
+  send_data render_to_string(options), filename: download_name, type: Mime[:xlsx], disposition: disposition
 end
 
 # For respond_to default
